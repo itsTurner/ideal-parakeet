@@ -4,17 +4,18 @@ import (
 	"bytes"
 	"fmt"
 	"net/smtp"
+	"os"
 	"text/template"
 )
 
 func main() {
 	// Sender data.
-	from := "thebippitybops@gmail.com"
-	password := "tozgbuucqggeertu"
+	from := os.Getenv("SENDER_ADDR")
+	password := os.Getenv("SENDER_PASS")
 
 	// Receiver email address.
 	to := []string{
-		"hey@ta.vin",
+		"email@place.com",
 	}
 
 	// smtp server configuration.
@@ -29,14 +30,14 @@ func main() {
 	var body bytes.Buffer
 
 	mimeHeaders := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
-	body.Write([]byte(fmt.Sprintf("Subject: This is a test subject \n%s\n\n", mimeHeaders)))
+	body.Write([]byte(fmt.Sprintf("Subject: Hello icon! \n%s\n\n", mimeHeaders)))
 
 	t.Execute(&body, struct {
 		Name    string
 		Message string
 	}{
-		Name:    "Tavin Turner",
-		Message: "This is a test message in a HTML template",
+		Name:    "Name",
+		Message: `I'm sending you an email`,
 	})
 
 	// Sending email.
