@@ -1,0 +1,5 @@
+github.com/cloudmailin/cloudmailin-go v0.2.0 h1:F9WqhldGN+7a23WwQg1SSmRhHxMdoffNam+KgX3ADuc=
+github.com/cloudmailin/cloudmailin-go v0.2.0/go.mod h1:sIDNLB8ZEFLhUJ5g2iDfdmEqvhWCcmLXfCJncMCWbXY=
+github.com/google/go-cmp v0.5.6 h1:BKbKCqvP6I+rmFHt06ZmyQtvB8xAkWdhFyr0ZUNZcxQ=
+github.com/google/go-cmp v0.5.6/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
+golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
