@@ -1,5 +1,5 @@
 import { useState } from "react";
-import addJournalEntry from "./addJournalEntryFunction";
+import addJournalEntry from "./journalDbFunctions";
 
 export const AddJournalEntry = () => {
   // might have to change the types on these

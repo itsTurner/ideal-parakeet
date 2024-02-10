@@ -1,5 +1,5 @@
 import { useState } from "react";
-import addReminder from "./addReminderFunction";
+import addReminder from "./reminderFunctions";
 
 export const AddReminder = () => {
   // might have to change the types of these
