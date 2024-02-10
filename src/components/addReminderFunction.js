@@ -11,6 +11,7 @@ const addReminder = async ({
   frequency,
   scale,
   reminderTime,
+  S,
 }) => {
   const user = auth.currentUser;
 
