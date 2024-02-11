@@ -1,4 +1,4 @@
-import { auth } from "../config/firebase";
+import { auth } from "../../config/firebase";
 import { signUpFunc } from "./authFunctions";
 import { useState } from "react";
 

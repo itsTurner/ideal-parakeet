@@ -1,5 +1,5 @@
-import { auth } from "../config/firebase";
-import { db } from "../config/firebase";
+import { auth } from "../../config/firebase";
+import { db } from "../../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 const addReminder = async ({
@@ -41,4 +41,28 @@ const addReminder = async ({
   }
 };
 
-export default addReminder;
+const getReminders = async () => {
+  // Read data from the database and return
+
+  let data;
+
+  try {
+    const remindersCollecRef = collection(db, "Reminders");
+    data = await getDocs(remindersCollecRef);
+  } catch (err) {
+    console.error(err);
+    return;
+  }
+
+  if (data) {
+    const entries = data.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return entries;
+  }
+
+  return [];
+};
+
+export { addReminder, getReminders };

@@ -1,5 +1,5 @@
 // Auth is imported from local file where firebase app is initialized and authentication service is exported
-import { auth } from "../config/firebase";
+import { auth } from "../../config/firebase";
 // firebase authentication for creating a new user account with email and password
 import {
   createUserWithEmailAndPassword,
