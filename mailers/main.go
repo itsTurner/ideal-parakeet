@@ -5,10 +5,6 @@ import (
 	"fmt"
 	"log"
 	"time"
-
-	"cloud.google.com/go/firestore"
-	firebase "firebase.google.com/go/v4"
-	"firebase.google.com/go/v4/auth"
 )
 
 func main() {
@@ -24,11 +20,15 @@ func main() {
 	}
 	defer store.Close()
 
-	postContent("test@test.com", "Title", "Body", app, auth, store, ctx)
+	firestate := &FirebaseState{ctx, app, auth, store}
+
+	serveIncomingMail(firestate)
+
+	// postContent("test@test.com", "Title", "Body", firestate)
 }
 
-func postContent(email string, title string, body string, app *firebase.App, auth *auth.Client, store *firestore.Client, ctx context.Context) {
-	user := getUserByEmail(email, ctx, auth)
+func postContent(email string, title string, body string, firestate *FirebaseState) {
+	user := getUserByEmail(email, firestate.Context, firestate.Auth)
 
 	timestamp := time.Now().Unix()
 
@@ -39,7 +39,7 @@ func postContent(email string, title string, body string, app *firebase.App, aut
 	}
 
 	docTitle := fmt.Sprintf("%s_%d", user.UserInfo.UID, timestamp)
-	_, err := store.Collection("journalEntries").Doc(docTitle).Set(ctx, demodoc)
+	_, err := firestate.Store.Collection("journalEntries").Doc(docTitle).Set(firestate.Context, demodoc)
 	if err != nil {
 		log.Printf("An error has occurred: %s", err)
 	}

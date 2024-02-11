@@ -7,13 +7,15 @@ import (
 	cloudmailin "github.com/cloudmailin/cloudmailin-go"
 )
 
-func main() {
-	http.HandleFunc("/incoming_mail", handleIncomingPOST)
+func serveIncomingMail(firestate *FirebaseState) {
+	http.HandleFunc("/incoming_mail", func(w http.ResponseWriter, req *http.Request) {
+		handleIncomingPOST(w, req, firestate)
+	})
 
 	http.ListenAndServe(":3000", nil)
 }
 
-func handleIncomingPOST(w http.ResponseWriter, req *http.Request) {
+func handleIncomingPOST(w http.ResponseWriter, req *http.Request, firestate *FirebaseState) {
 	message, err := cloudmailin.ParseIncoming(req.Body)
 	if err != nil {
 		http.Error(w, "Error parsing message: "+err.Error(), http.StatusUnprocessableEntity)
