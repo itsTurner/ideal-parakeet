@@ -8,9 +8,9 @@ import (
 	"text/template"
 )
 
-func main() {
-	sendEmail("thebippitybops@gmail.com", "Bip bop", "Being ahgbij")
-}
+// func main() {
+// 	sendEmail("thebippitybops@gmail.com", "Bip bop", "Being ahgbij")
+// }
 
 func sendEmail(addr string, name string, content string) {
 	// Sender data.
