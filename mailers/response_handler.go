@@ -12,6 +12,11 @@ func serveIncomingMail(firestate *FirebaseState) {
 		handleIncomingPOST(w, req, firestate)
 	})
 
+	http.HandleFunc("/request_notification", func(w http.ResponseWriter, req *http.Request) {
+		fmt.Fprintf(w, "Hello, world!")
+		fmt.Println(req)
+	})
+
 	http.ListenAndServe(":3000", nil)
 }
 
