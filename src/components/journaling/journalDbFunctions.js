@@ -77,7 +77,7 @@ const replaceJournalEntry = async ({ title, docID, body }) => {
   }
   setDoc(doc(db, "journalEntries", docID), {
     title: title,
-    datetime: data.datetime,
+    dateTime: data.dateTime,
     body: body,
   });
 };
