@@ -1,5 +1,5 @@
 import { useState } from "react";
-import addReminder from "./reminderFunctions";
+import { addReminder } from "./reminderFunctions";
 
 export const AddReminder = () => {
   // might have to change the types of these
@@ -81,45 +81,3 @@ export const AddReminder = () => {
     </form>
   );
 };
-
-/*
-export const AddReminder = () => {
-  const [entry, setReminder] = useState("");
-  const user = auth.currentUser;
-
-  const addReminder = async () => {
-    if (!user) {
-      console.log("No user logged in");
-      return;
-    }
-
-    const userID = user.uid;
-    const timestamp = Date.now();
-    // combine upload timestamp and userID for the journalID
-    const docID = userID + "_" + timestamp;
-
-    try {
-      await setDoc(doc(db, "Reminders", docID), {
-        userID: userID,
-        timestamp: timestamp,
-        entry: entry,
-        // other fields
-      });
-      console.log("Reminder document added with ID: ", docID);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
-
-  return (
-    <div>
-      <input
-        placeholder="reminder"
-        entry={entry}
-        onChange={(e) => setReminder(e.target.value)}
-      />
-      <button onClick={addReminder}>Save Reminder</button>
-    </div>
-  );
-};
-*/

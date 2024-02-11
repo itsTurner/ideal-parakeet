@@ -17,6 +17,7 @@ export const ListJournalEntries = () => {
       <button onClick={handleFetchEntries}>Load Journal Entries</button>
       {entries.map((entry) => (
         <div key={entry.id}>
+          <p>{entry.id}</p>
           <p>{entry.title}</p>
           <p>{entry.dateTime}</p>
           <p>{entry.body}</p>

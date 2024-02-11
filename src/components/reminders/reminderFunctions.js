@@ -1,6 +1,15 @@
 import { auth } from "../../config/firebase";
 import { db } from "../../config/firebase";
-import { doc, setDoc, getDocs, getDoc, collection } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  getDocs,
+  getDoc,
+  collection,
+  deleteDoc,
+} from "firebase/firestore";
+
+///////////////////////////////////////////////////////////////
 const addReminder = async ({
   description,
   index,
@@ -14,6 +23,7 @@ const addReminder = async ({
 }) => {
   const user = auth.currentUser;
 
+  // make sure user is logged in before trying to add anything
   if (!user) {
     console.log("No user logged in");
     return;
@@ -40,28 +50,38 @@ const addReminder = async ({
   }
 };
 
+/////////////////////////////////////////////////////////////////
 const getReminders = async () => {
   // Read data from the database and return
 
-  let data;
-
   try {
     const remindersCollecRef = collection(db, "Reminders");
-    data = await getDocs(remindersCollecRef);
-  } catch (err) {
-    console.error(err);
-    return;
-  }
-
-  if (data) {
+    const data = await getDocs(remindersCollecRef);
     const entries = data.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
-    return entries;
+    console.log(entries);
+    return entries; // Directly return the processed entries
+  } catch (err) {
+    console.error("Error retrieving reminders: ", err);
+    return []; // Explicitly return an empty array on error
   }
-
-  return [];
 };
 
-export { addReminder, getReminders };
+///////////////////////////////////////////////////////////////
+const removeReminder = async (docID) => {
+  // input will be the id
+
+  try {
+    // const remindersCollecRef = collection(db, "Reminders");
+    const docRef = doc(db, "Reminders", docID);
+    console.log("the doc is: ", doc);
+    await deleteDoc(docRef);
+    console.log("Successfully removed: ", docID);
+  } catch (err) {
+    console.error("Error removing reminder: ", err);
+  }
+};
+
+export { addReminder, getReminders, removeReminder };

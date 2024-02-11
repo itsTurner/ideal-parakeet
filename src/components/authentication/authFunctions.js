@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
+///////////////////////////////////////////////////////////////
 export const signUpFunc = async (email, password) => {
   // add something that checks email isn't signed up already?
   // add something that checks no one is logged in currently
@@ -21,6 +22,7 @@ export const signUpFunc = async (email, password) => {
   }
 };
 
+////////////////////////////////////////////////////////////////
 export const loginFunc = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(
@@ -36,6 +38,7 @@ export const loginFunc = async (email, password) => {
   }
 };
 
+///////////////////////////////////////////////////////////////
 export const logoutFunc = async () => {
   try {
     await signOut(auth);
