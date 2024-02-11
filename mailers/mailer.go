@@ -9,14 +9,18 @@ import (
 )
 
 func main() {
+	sendEmail("thebippitybops@gmail.com", "Bip bop", "Being ahgbij")
+}
+
+func sendEmail(addr string, name string, content string) {
 	// Sender data.
 	from := os.Getenv("SENDER_ADDR")
 	password := os.Getenv("SENDER_PASS")
 
+	fmt.Printf("%s // %s\n", from, password)
+
 	// Receiver email address.
-	to := []string{
-		"email@place.com",
-	}
+	to := []string{addr}
 
 	// smtp server configuration.
 	smtpHost := "smtp.gmail.com"
@@ -30,14 +34,14 @@ func main() {
 	var body bytes.Buffer
 
 	mimeHeaders := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
-	body.Write([]byte(fmt.Sprintf("Subject: Hello icon! \n%s\n\n", mimeHeaders)))
+	body.Write([]byte(fmt.Sprintf("Cc: c46409d075fa6947dd94@cloudmailin.net \nSubject: Hello icon! \n%s\n\n", mimeHeaders)))
 
 	t.Execute(&body, struct {
 		Name    string
 		Message string
 	}{
-		Name:    "Name",
-		Message: `I'm sending you an email`,
+		Name:    name,
+		Message: content,
 	})
 
 	// Sending email.
