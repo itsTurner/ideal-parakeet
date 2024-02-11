@@ -30,6 +30,8 @@ func handleIncomingPOST(w http.ResponseWriter, req *http.Request, firestate *Fir
 	}
 
 	fmt.Printf("%s: %s\n---\n%s", author, subject, body)
+	fmt.Printf("[Sending to post content...]")
+	postContent(author, subject, body, firestate)
 
 	fmt.Fprint(w, "Thanks for the message: ", message.Headers.First("message_id"))
 }
