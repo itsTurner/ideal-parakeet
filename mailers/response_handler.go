@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -8,16 +9,29 @@ import (
 )
 
 func serveIncomingMail(firestate *FirebaseState) {
+	// taskScheduler := chrono.NewDefaultTaskScheduler()
+	// now := time.Now()
+	// startTime := now.Add(time.Second * 1)
+
 	http.HandleFunc("/incoming_mail", func(w http.ResponseWriter, req *http.Request) {
 		handleIncomingPOST(w, req, firestate)
 	})
 
 	http.HandleFunc("/request_notification", func(w http.ResponseWriter, req *http.Request) {
-		fmt.Fprintf(w, "Hello, world!")
-		fmt.Println(req)
+		decoder := json.NewDecoder(req.Body)
+		var r WebResponse
+		err := decoder.Decode(&r)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(r)
 	})
 
 	http.ListenAndServe(":3000", nil)
+}
+
+func sendInFuture(addr string, name string, content string, when int) {
+
 }
 
 func handleIncomingPOST(w http.ResponseWriter, req *http.Request, firestate *FirebaseState) {

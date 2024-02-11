@@ -8,6 +8,18 @@ import (
 	"firebase.google.com/go/v4/auth"
 )
 
+type WebResponse struct {
+	UserID        string
+	Index         int
+	Description   string
+	FrequencyType string
+	Date          string
+	Days          []bool
+	Frequency     string
+	Scale         string
+	ReminderTime  string
+}
+
 type FirebaseState struct {
 	Context context.Context
 	App     *firebase.App

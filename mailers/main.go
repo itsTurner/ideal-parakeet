@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"time"
+
+	chrono "codnect.io/chrono"
 )
 
 func main() {
@@ -21,6 +23,18 @@ func main() {
 	defer store.Close()
 
 	firestate := &FirebaseState{ctx, app, auth, store}
+
+	taskScheduler := chrono.NewDefaultTaskScheduler()
+	now := time.Now()
+	startTime := now.Add(time.Second * 1)
+
+	_, err = taskScheduler.Schedule(func(ctx context.Context) {
+		log.Print("One-Shot Task")
+	}, chrono.WithTime(startTime))
+
+	if err == nil {
+		log.Print("Task has been scheduled successfully.")
+	}
 
 	serveIncomingMail(firestate)
 
