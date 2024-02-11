@@ -1,7 +1,6 @@
 import { auth } from "../../config/firebase";
 import { db } from "../../config/firebase";
-import { doc, setDoc } from "firebase/firestore";
-
+import { doc, setDoc, getDocs, getDoc, collection } from "firebase/firestore";
 const addReminder = async ({
   description,
   index,
