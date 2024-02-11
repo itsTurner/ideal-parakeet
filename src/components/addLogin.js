@@ -17,7 +17,7 @@ export const Login = () => {
         type="password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={() => loginFunc(email, password)}>Sign Up</button>
+      <button onClick={() => loginFunc(email, password)}>Login</button>
     </div>
   );
 };
