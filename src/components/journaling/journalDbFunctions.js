@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 
 /////////////////////////////////////////////////////////////////////
-const addJournalEntry = async ({ title, dateTime, body, S }) => {
+const addJournalEntry = async ({ title, dateTime, body }) => {
   const user = auth.currentUser;
 
   // make sure logged in before adding anything
@@ -60,6 +60,28 @@ const getJournalEntries = async () => {
   return [];
 };
 
+/////////////////////////////////////////////////////////////////////
+const replaceJournalEntry = async ({ title, docID, body }) => {
+  console.log("docID is: ", docID);
+  console.log("title is: ", title);
+  console.log("body is: ", body);
+  let data;
+
+  try {
+    const docRef = doc(db, "journalEntries", docID);
+    const docSnapshot = await getDoc(docRef);
+    data = docSnapshot.data();
+    console.log("data:", data, "data type: ", typeof data);
+  } catch (err) {
+    console.log("Error updating journal entry: ", err);
+  }
+  setDoc(doc(db, "journalEntries", docID), {
+    title: title,
+    datetime: data.datetime,
+    body: body,
+  });
+};
+
 //////////////////////////////////////////////////////
 const removeJournalEntry = async (docID) => {
   // input will be the id
@@ -75,4 +97,9 @@ const removeJournalEntry = async (docID) => {
   }
 };
 
-export { addJournalEntry, getJournalEntries, removeJournalEntry };
+export {
+  addJournalEntry,
+  getJournalEntries,
+  removeJournalEntry,
+  replaceJournalEntry,
+};

@@ -8,6 +8,7 @@ import { LogOut } from "./components/authentication/addLogout";
 import { Login } from "./components/authentication/addLogin";
 import { RemoveReminder } from "./components/reminders/removeReminder";
 import { RemoveJournalEntry } from "./components/journaling/removeJournalEntry";
+import { ReplaceJournalEntry } from "./components/journaling/replaceJournalEntry";
 // import { User } from "./components/users";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <ListReminders />
       <RemoveReminder />
       <RemoveJournalEntry />
+      <ReplaceJournalEntry />
     </div>
   );
 }
